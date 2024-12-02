@@ -2,12 +2,6 @@ from flask import Flask, send_file, render_template, request
 from PyPDF2 import PdfReader, PdfWriter
 import os
 
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # Render proporciona el puerto en PORT
-    app.run(host='0.0.0.0', port=port)
-
-
 app = Flask(__name__)
 UPLOAD_FOLDER = 'documentos'  # Carpeta donde se almacenan los PDFs
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Crea la carpeta si no existe
@@ -56,4 +50,6 @@ def rotate_pdf(filename):
     return send_file(output_path)  # Devuelve el archivo rotado
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get('PORT', 5000))  # Usar el puerto proporcionado por Render
+    app.run(host='0.0.0.0', port=port, debug=True)
