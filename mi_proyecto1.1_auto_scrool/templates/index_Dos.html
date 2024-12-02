@@ -27,7 +27,7 @@
 
     pdfjsLib.getDocument(url).promise.then(pdfDoc => {
       const numPages = pdfDoc.numPages;
-#Cambiar <= numpages para determinar el numero de paginas
+      
       for (let pageNum = 1; pageNum <= numPages; pageNum++) {
         pdfDoc.getPage(pageNum).then(page => {
           const viewport = page.getViewport({ scale: 1.0 });
