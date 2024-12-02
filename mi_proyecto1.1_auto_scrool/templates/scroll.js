@@ -7,13 +7,13 @@ document.getElementById("scrollButton").addEventListener("click", function() {
     this.textContent = "Detener Scroll";
 
     scrollInterval = setInterval(() => {
-      window.scrollBy(0, 1); // Desplaza la página 5px hacia abajo
+      window.scrollBy(0, 1); // Desplaza la página 1px hacia abajo
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         clearInterval(scrollInterval);
         scrolling = false;
         this.textContent = "Iniciar Scroll";
       }
-    }, 50); // Ajusta la velocidad (más bajo = más rápido)
+    }, 150); // Aumentar el intervalo para un desplazamiento más lento
   } else {
     clearInterval(scrollInterval);
     scrolling = false;
