@@ -13,7 +13,7 @@ document.getElementById("scrollButton").addEventListener("click", function() {
         scrolling = false;
         this.textContent = "Iniciar Scroll";
       }
-    }, 80); // Ajusta la velocidad (más bajo = más rápido)
+    }, 5); // Ajusta la velocidad (más bajo = más rápido)
   } else {
     clearInterval(scrollInterval);
     scrolling = false;
