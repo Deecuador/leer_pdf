@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visor de PDF - Todas las Páginas</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style_dos.css') }}">
+</head>
+<body>
+  <h1>Visor de PDF - Todas las Páginas</h1>
+  <button id="scrollButton">Iniciar Scroll</button>
+
+  <div id="pdf-container"></div>
+
+  <footer>
+    Desarrollado con <span style="color: red;">❤</span> por <a href="https://github.com/">TuNombre</a>
+  </footer>
+
+  <script src="{{ url_for('static', filename='scroll.js') }}"></script>
+  <script>
+    const url = '/get-pdf/deja_de_ser_tu.pdf'; // Ruta del archivo PDF en el servidor
+    const container = document.getElementById('pdf-container');
+
+    pdfjsLib.getDocument(url).promise.then(pdfDoc => {
+      const numPages = pdfDoc.numPages;
+
+      for (let pageNum = 1; pageNum <= 30; pageNum++) {
+        pdfDoc.getPage(pageNum).then(page => {
+          const viewport = page.getViewport({ scale: 1.0 });
+          const scale = container.clientWidth / viewport.width;
+          const scaledViewport = page.getViewport({ scale: scale });
+
+          const pageContainer = document.createElement('div');
+          pageContainer.classList.add('page-container');
+          container.appendChild(pageContainer);
+
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          canvas.height = scaledViewport.height;
+          canvas.width = scaledViewport.width;
+          pageContainer.appendChild(canvas);
+
+          page.render({
+            canvasContext: ctx,
+            viewport: scaledViewport
+          }).promise.then(() => {
+            console.log(`Página ${pageNum} renderizada correctamente.`);
+          }).catch(err => {
+            console.error(`Error al renderizar la página ${pageNum}:`, err);
+          });
+        }).catch(err => {
+          console.error(`Error al obtener la página ${pageNum}:`, err);
+        });
+      }
+    }).catch(error => {
+      console.error("Error al cargar el PDF:", error);
+      container.innerHTML = `<p>Error al cargar el PDF: ${error.message}</p>`;
+    });
+  </script>
+</body>
+</html>

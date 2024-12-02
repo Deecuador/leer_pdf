@@ -1,0 +1,19 @@
+#scrollButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 24px;
+  background-color: #4CAF50; /* Verde elegante */
+  color: white;
+  border: none;
+  border-radius: 30px; /* Botón redondeado */
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#scrollButton:hover {
+  background-color: #45a049; /* Cambio suave en hover */
+  transform: scale(1.05); /* Agrandar ligeramente */
+}
