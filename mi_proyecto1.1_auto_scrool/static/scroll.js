@@ -13,7 +13,7 @@ document.getElementById("scrollButton").addEventListener("click", function() {
         scrolling = false;
         this.textContent = "Iniciar Scroll";
       }
-    }, 100); // Aumentar el intervalo para un desplazamiento más lento
+    }, 80); // Aumentar el intervalo para un desplazamiento más lento
   } else {
     clearInterval(scrollInterval);
     scrolling = false;
